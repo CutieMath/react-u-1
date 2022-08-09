@@ -8,9 +8,12 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      name: "Cutie",
+      name: "Yuxin",
     };
   }
+  changeName = () => {
+    this.setState({ name: "Cutie Pie" });
+  };
 
   // What we want to render
   render() {
@@ -21,9 +24,7 @@ class App extends Component {
           <p>
             <code>{this.state.name} x</code>
           </p>
-          <button onClick={() => this.setState({ name: "CutiePie" })}>
-            Change Name
-          </button>
+          <button onClick={this.changeName}>Change Name</button>
         </header>
       </div>
     );
