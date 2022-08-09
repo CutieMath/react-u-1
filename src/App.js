@@ -11,9 +11,6 @@ class App extends Component {
       name: "Yuxin",
     };
   }
-  changeName = () => {
-    this.setState({ name: "Cutie Pie" });
-  };
 
   // What we want to render
   render() {
@@ -24,7 +21,22 @@ class App extends Component {
           <p>
             <code>{this.state.name} x</code>
           </p>
-          <button onClick={this.changeName}>Change Name</button>
+          <button
+            onClick={() => {
+              this.setState(
+                () => {
+                  return {
+                    name: "Cutie",
+                  };
+                },
+                () => {
+                  console.log(this.state);
+                }
+              );
+            }}
+          >
+            Change Name
+          </button>
         </header>
       </div>
     );
