@@ -3,6 +3,15 @@ import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
+  // local state
+  // The component will be re-rendered when the state changes
+  constructor() {
+    super();
+    this.state = {
+      name: "Cutie",
+    };
+  }
+
   // What we want to render
   render() {
     return (
@@ -10,16 +19,11 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            <code>Why you so awesome x</code>
+            <code>{this.state.name} x</code>
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          <button onClick={() => this.setState({ name: "CutiePie" })}>
+            Change Name
+          </button>
         </header>
       </div>
     );
