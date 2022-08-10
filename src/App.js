@@ -10,30 +10,33 @@ class App extends Component {
     this.state = {
       monsters: [], // initial state
     };
+    console.log(1);
   }
 
   // lifecycle method
   componentDidMount() {
     fetch("https://jsonplaceholder.typicode.com/users")
       .then((response) => response.json())
-      .then((users) =>
+      .then((monsters) =>
         this.setState(
           () => {
-            return { monsters: users };
+            return { monsters: monsters };
           },
           () => {
             console.log(this.state);
           }
         )
       );
+    console.log(3);
   }
 
   // What we want to render
   render() {
+    console.log(2);
     return (
       <div className="App">
         {this.state.monsters.map((monster, index) => {
-          return <div key={index}>{monster.name}</div>;
+          return <h3 key={index}>{monster.name}</h3>;
         })}
       </div>
     );
