@@ -1,5 +1,4 @@
 import { Component } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 class App extends Component {
@@ -10,7 +9,7 @@ class App extends Component {
     this.state = {
       monsters: [], // initial state
     };
-    console.log(1);
+    console.log("1. Constructor renders");
   }
 
   // lifecycle method
@@ -27,12 +26,12 @@ class App extends Component {
           }
         )
       );
-    console.log(3);
+    console.log("3. Component did mount");
   }
 
-  // What we want to render
+  // What we want to render and re-render when the state changes
   render() {
-    console.log(2);
+    console.log("2. Component renders");
     return (
       <div className="App">
         {this.state.monsters.map((monster, index) => {
