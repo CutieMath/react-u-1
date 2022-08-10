@@ -29,11 +29,19 @@ class App extends Component {
     console.log("3. Component did mount");
   }
 
+  searchMonster = (monsterInput) => {};
+
   // What we want to render and re-render when the state changes
   render() {
     console.log("2. Component renders");
     return (
       <div className="App">
+        <input
+          className="search-box"
+          type="search"
+          placeholder="Search Monsters"
+          onChange={(e) => this.searchMonster(e.target.value)}
+        />
         {this.state.monsters.map((monster, index) => {
           return <h3 key={index}>{monster.name}</h3>;
         })}
