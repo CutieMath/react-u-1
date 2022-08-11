@@ -1,6 +1,7 @@
 import { Component } from "react";
 import "./App.css";
 import CardList from "./components/card-list/card-list.component";
+import SearchBox from "./components/search-box/search-box.component";
 
 class App extends Component {
   // local state
@@ -51,13 +52,7 @@ class App extends Component {
 
     return (
       <div className="App">
-        <input
-          className="search-box"
-          type="search"
-          placeholder="Search Monsters"
-          // Best practice to change state in the component call as States are easily accessed.
-          onChange={onSearchChange}
-        />
+        <SearchBox onChangeHandler={onSearchChange} />
         <CardList monsters={filteredMonsters} />
       </div>
     );

@@ -3,6 +3,7 @@ import React, { Component } from "react";
 class CardList extends Component {
   state = {};
   render() {
+    // Components will re-render when props change
     const { monsters } = this.props;
     return (
       <div>
