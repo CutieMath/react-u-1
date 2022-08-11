@@ -6,9 +6,8 @@ class SearchBox extends Component {
     return (
       <input
         type="search"
-        // className="search-box"
-        // placeholder="Search Monsters"
-        // Best practice to change state in the component call as States are easily accessed.
+        className={this.props.className}
+        placeholder={this.props.placeholder}
         onChange={this.props.onChangeHandler}
       />
     );
