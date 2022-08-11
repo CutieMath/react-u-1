@@ -30,15 +30,22 @@ class App extends Component {
     console.log("3. Component did mount");
   }
 
+  // Extract the function so it's not initalized everytime the component renders
+  onSearchChange = (e) => {
+    this.setState({ searchField: e.target.value });
+  };
+
   // What we want to render and re-render when the state changes
   render() {
     console.log("2. Component renders");
 
+    // use object destructuring for cleaner code
+    const { monsters, searchField } = this.state;
+    const { onSearchChange } = this;
+
     // filter the monsters array based on the searchField
-    const filteredMonsters = this.state.monsters.filter((monster) =>
-      monster.name
-        .toLocaleLowerCase()
-        .includes(this.state.searchField.toLocaleLowerCase())
+    const filteredMonsters = monsters.filter((monster) =>
+      monster.name.toLocaleLowerCase().includes(searchField.toLocaleLowerCase())
     );
 
     return (
@@ -47,7 +54,8 @@ class App extends Component {
           className="search-box"
           type="search"
           placeholder="Search Monsters"
-          onChange={(e) => this.setState({ searchField: e.target.value })}
+          // Best practice to change state in the component call as States are easily accessed.
+          onChange={onSearchChange}
         />
         {filteredMonsters.map((monster, index) => {
           return <h3 key={index}>{monster.name}</h3>;
