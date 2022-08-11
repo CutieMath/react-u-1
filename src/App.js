@@ -1,7 +1,7 @@
 import { Component } from "react";
-import "./App.css";
 import CardList from "./components/card-list/card-list.component";
 import SearchBox from "./components/search-box/search-box.component";
+import "./App.css";
 
 class App extends Component {
   // local state
@@ -53,7 +53,7 @@ class App extends Component {
     return (
       <div className="App">
         <SearchBox
-          className="search-box"
+          className="monster-search-box"
           onChangeHandler={onSearchChange}
           placeholder="Search Monsters"
         />
