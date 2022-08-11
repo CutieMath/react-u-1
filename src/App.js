@@ -1,5 +1,6 @@
 import { Component } from "react";
 import "./App.css";
+import CardList from "./components/card-list/card-list.component";
 
 class App extends Component {
   // local state
@@ -57,9 +58,7 @@ class App extends Component {
           // Best practice to change state in the component call as States are easily accessed.
           onChange={onSearchChange}
         />
-        {filteredMonsters.map((monster, index) => {
-          return <h3 key={index}>{monster.name}</h3>;
-        })}
+        <CardList monsters={filteredMonsters} />
       </div>
     );
   }
