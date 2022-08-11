@@ -8,6 +8,7 @@ class App extends Component {
     super();
     this.state = {
       monsters: [], // initial state
+      searchField: "", // keep track of customer input so when letters removed it gets updated
     };
     console.log("1. Constructor renders");
   }
@@ -29,25 +30,26 @@ class App extends Component {
     console.log("3. Component did mount");
   }
 
-  searchMonster = (monsterInput) => {
-    const filteredMonsters = this.state.monsters.filter((monster) =>
-      monster.name.toLowerCase().includes(monsterInput.toLowerCase())
-    );
-    this.setState({ monsters: filteredMonsters });
-  };
-
   // What we want to render and re-render when the state changes
   render() {
     console.log("2. Component renders");
+
+    // filter the monsters array based on the searchField
+    const filteredMonsters = this.state.monsters.filter((monster) =>
+      monster.name
+        .toLocaleLowerCase()
+        .includes(this.state.searchField.toLocaleLowerCase())
+    );
+
     return (
       <div className="App">
         <input
           className="search-box"
           type="search"
           placeholder="Search Monsters"
-          onChange={(e) => this.searchMonster(e.target.value)}
+          onChange={(e) => this.setState({ searchField: e.target.value })}
         />
-        {this.state.monsters.map((monster, index) => {
+        {filteredMonsters.map((monster, index) => {
           return <h3 key={index}>{monster.name}</h3>;
         })}
       </div>
