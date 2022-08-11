@@ -29,7 +29,12 @@ class App extends Component {
     console.log("3. Component did mount");
   }
 
-  searchMonster = (monsterInput) => {};
+  searchMonster = (monsterInput) => {
+    const filteredMonsters = this.state.monsters.filter((monster) =>
+      monster.name.toLowerCase().includes(monsterInput.toLowerCase())
+    );
+    this.setState({ monsters: filteredMonsters });
+  };
 
   // What we want to render and re-render when the state changes
   render() {
