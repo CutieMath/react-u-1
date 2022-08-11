@@ -7,15 +7,17 @@ class CardList extends Component {
     // Components will re-render when props change
     const { monsters } = this.props;
     return (
-      <div className="card-section">
+      <div className="card-list">
         {monsters.map((monster, index) => {
+          const { name, id, email } = monster;
           return (
             <div className="card-container" key={index}>
               <img
-                alt={`a monster with name ${monster.name}`}
-                src={`https://robohash.org/${monster.id}?set=set2&size=180x180`}
+                alt={`a monster with name ${name}`}
+                src={`https://robohash.org/${id}?set=set2&size=180x180`}
               />
-              <h2 key={index}>{monster.name}</h2>
+              <h2 key={index}>{name}</h2>
+              <p>{email}</p>
             </div>
           );
         })}
