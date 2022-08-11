@@ -8,4 +8,5 @@ body {
   text-align: center;
   background: rgb(2,0,36);
   background: linear-gradient(342deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 14%, rgba(224,149,231,1) 100%);
-}
+  background-repeat: no-repeat;
+ }
