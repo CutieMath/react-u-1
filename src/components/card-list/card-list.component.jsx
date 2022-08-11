@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./card-list.styles.css";
 
 class CardList extends Component {
   state = {};
@@ -6,7 +7,7 @@ class CardList extends Component {
     // Components will re-render when props change
     const { monsters } = this.props;
     return (
-      <div>
+      <div className="card-section">
         {monsters.map((monster, index) => {
           return (
             <div className="card-container" key={index}>
@@ -14,6 +15,7 @@ class CardList extends Component {
                 alt={`a monster with name ${monster.name}`}
                 src={`https://robohash.org/${monster.id}?set=set2&size=180x180`}
               />
+              <h2 key={index}>{monster.name}</h2>
             </div>
           );
         })}
