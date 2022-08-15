@@ -16,6 +16,7 @@ const App = () => {
   // When state changes, the component re-renders
   const [searchField, setSearchField] = useState("");
   const [monsters, setMonsters] = useState([]);
+  const [filteredMonsters, setFilteredMonsters] = useState(monsters);
   const onSearchChange = (e) => {
     setSearchField(e.target.value.toLocaleLowerCase());
   };
@@ -34,9 +35,17 @@ const App = () => {
     []
   );
 
-  const filteredMonsters = monsters.filter((monster) =>
-    monster.name.toLocaleLowerCase().includes(searchField.toLocaleLowerCase())
-  );
+  // OPTIMISATION: We only want to run the filter when the search field changes
+  useEffect(() => {
+    setFilteredMonsters(
+      monsters.filter((monster) =>
+        monster.name
+          .toLocaleLowerCase()
+          .includes(searchField.toLocaleLowerCase())
+      )
+    );
+    console.log("effect is firing");
+  }, [searchField, monsters]);
 
   return (
     <div className="App">
