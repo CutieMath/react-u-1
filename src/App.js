@@ -30,7 +30,8 @@ const App = () => {
         .then((users) => setMonsters(users));
     },
     // Dependency array, State or props
-    [monsters]
+    // If not provided, it will only run when the component is mounted
+    []
   );
 
   const filteredMonsters = monsters.filter((monster) =>
