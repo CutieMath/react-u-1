@@ -1,67 +1,53 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 import CardList from "./components/card-list/card-list.component";
 import SearchBox from "./components/search-box/search-box.component";
 import "./App.css";
 
-class App extends Component {
-  // local state
-  // The component will be re-rendered when the state changes
-  constructor() {
-    super();
-    this.state = {
-      monsters: [], // initial state
-      searchField: "", // keep track of customer input so when letters removed it gets updated
-    };
-    console.log("1. Constructor renders");
-  }
+const App = () => {
+  // - Pure function
+  // Return exact same thing no matter how many times it is called
+  // - Impure function
+  // The value of the function is dependent on the value of the parameters
+  // - Side effects
+  // A function create some change outside of itself
+  // - Note: React will create impure functions using hooks
 
-  // lifecycle method
-  componentDidMount() {
-    fetch("https://jsonplaceholder.typicode.com/users")
-      .then((response) => response.json())
-      .then((monsters) =>
-        this.setState(
-          () => {
-            return { monsters: monsters };
-          },
-          () => {
-            console.log(this.state);
-          }
-        )
-      );
-    console.log("3. Component did mount");
-  }
-
-  // Extract the function so it's not initalized everytime the component renders
-  onSearchChange = (e) => {
-    this.setState({ searchField: e.target.value });
+  // UseState hook encapsulate State in a component function
+  // When state changes, the component re-renders
+  const [searchField, setSearchField] = useState("");
+  const [monsters, setMonsters] = useState([]);
+  const onSearchChange = (e) => {
+    setSearchField(e.target.value.toLocaleLowerCase());
   };
 
-  // What we want to render and re-render when the state changes
-  render() {
-    console.log("2. Component renders");
+  // Use fetch only here will cause an infinite
+  // Because the fetch sets the state => Component re-render => fetch runs again to set a new state
+  // To resolve this, use useEffect hook
+  useEffect(
+    () => {
+      fetch("https://jsonplaceholder.typicode.com/users")
+        .then((response) => response.json())
+        .then((users) => setMonsters(users));
+    },
+    // Dependency array, State or props
+    [monsters]
+  );
 
-    // use object destructuring for cleaner code
-    const { monsters, searchField } = this.state;
-    const { onSearchChange } = this;
+  const filteredMonsters = monsters.filter((monster) =>
+    monster.name.toLocaleLowerCase().includes(searchField.toLocaleLowerCase())
+  );
 
-    // filter the monsters array based on the searchField
-    const filteredMonsters = monsters.filter((monster) =>
-      monster.name.toLocaleLowerCase().includes(searchField.toLocaleLowerCase())
-    );
-
-    return (
-      <div className="App">
-        <h1 className="app-title">Cute Monsters</h1>
-        <SearchBox
-          className="monster-search-box"
-          onChangeHandler={onSearchChange}
-          placeholder="Search Monsters"
-        />
-        <CardList monsters={filteredMonsters} />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <h1 className="app-title">Cute Monsters</h1>
+      <SearchBox
+        className="monster-search-box"
+        onChangeHandler={onSearchChange}
+        placeholder="Search Monsters"
+      />
+      <CardList monsters={filteredMonsters} />
+    </div>
+  );
+};
 
 export default App;
