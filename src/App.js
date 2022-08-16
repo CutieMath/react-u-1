@@ -17,6 +17,7 @@ const App = () => {
   const [searchField, setSearchField] = useState("");
   const [monsters, setMonsters] = useState([]);
   const [filteredMonsters, setFilteredMonsters] = useState(monsters);
+
   const onSearchChange = (e) => {
     setSearchField(e.target.value.toLocaleLowerCase());
   };
@@ -44,7 +45,6 @@ const App = () => {
           .includes(searchField.toLocaleLowerCase())
       )
     );
-    console.log("effect is firing");
   }, [searchField, monsters]);
 
   return (
